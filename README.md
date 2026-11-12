@@ -1,7 +1,7 @@
 # Lumo · 老电视上的家庭影音中心
 
 把一台 2014 年的乐视电视（Android 4.3，32 位 ARM）重新用起来：直连 NAS / Mac / Windows 的
-SMB 共享，插 U 盘直接放，七种播放引擎按机器能力自动挑选。
+SMB 共享，插 U 盘直接放，五种播放引擎按机器能力自动挑选。
 
 > **English**: Lumo is a minimal Android media player built for old ARMv7 TVs (Android 4.3+).
 > It speaks SMB2/SMB3 (own pure-Java implementation), SMB1 and WebDAV, plays from USB storage,
@@ -24,15 +24,19 @@ SMB 共享，插 U 盘直接放，七种播放引擎按机器能力自动挑选�
   左侧上下滑调亮度、长按加速、双击暂停）；
 - **播放中没有任何弹窗和 Toast**，所有反馈走顶部 HUD，不打断画面。
 
-| 浅色（白天）主题 | 局域网扫描 |
+| 服务器列表 | 浅色主题的播放控件 |
 |---|---|
-| ![浅色](screenshots/01-浅色主界面.png) | ![扫描](screenshots/03-局域网扫描.png) |
+| ![服务器卡片](screenshots/01-服务器卡片显示名称.png) | ![浅色控件](screenshots/03-浅色主题播放控件.png) |
 
-| 设置与诊断 | 浅色下的文件浏览 |
+| 画面比例（4:3 画框，不裁不拉） | 播放信息面板 |
 |---|---|
-| ![设置](screenshots/02-浅色设置与诊断.png) | ![浏览](screenshots/05-浅色文件列表.png) |
+| ![比例](screenshots/12-画面比例-4比3画框.png) | ![信息](screenshots/08-播放信息面板.png) |
 
-![连接超时提示](screenshots/04-连接超时提示.png)
+| 长按遥控器 OK = 全部选项 | 设置只写实际名称 |
+|---|---|
+| ![长按](screenshots/16-长按引擎-全部选项.png) | ![设置](screenshots/14-设置-只写实际名称.png) |
+
+![继续观看](screenshots/09-继续观看.png)
 
 ---
 
@@ -88,7 +92,7 @@ SMB 共享，插 U 盘直接放，七种播放引擎按机器能力自动挑选�
 
 ## 安装
 
-1. 到 [Releases](../../releases) 下载 `Lumo-vX.XX.apk`（或本地 `dist/` 目录）；
+1. 到 [Releases](../../releases) 下载最新 `Lumo-vX.XX.apk`；
 2. 拷到 U 盘插电视，用电视的文件管理器点开安装；
 3. 或 `adb install -r Lumo-v1.33.apk`。
 

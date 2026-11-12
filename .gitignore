@@ -1,0 +1,25 @@
+# ---- 构建产物 / 本地环境 ----
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ---- 签名文件：绝对不要进版本库 ----
+*.keystore
+*.jks
+keystore.properties
+
+# ---- 打的包：走 GitHub Releases 分发，仓库里不塞二进制 ----
+dist/*.apk
+*.apk
+*.ap_
+*.idsig
+
+# ---- 系统垃圾 ----
+.DS_Store
+Thumbs.db
+*.log

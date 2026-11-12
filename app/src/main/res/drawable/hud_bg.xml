@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HUD / 快进时间胶囊：跟主题走，浅色白胶囊深字，深色黑胶囊白字 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@color/player_hud_fill" />
+    <corners android:radius="18dp" />
+    <stroke android:width="1dp" android:color="@color/player_panel_stroke" />
+</shape>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lumo</string>
+    <string name="main_title">选择连接方式</string>
+    <string name="brand">LUMO</string>
+    <string name="brand_sub">家庭影音中心</string>
+    <string name="main_slogan">选一个影库开始播放</string>
+
+    <string name="section_servers">我的服务器</string>
+    <string name="section_usb">U 盘 / 移动存储</string>
+
+    <string name="smb">SMB 网络共享</string>
+    <string name="smb_desc">连接 NAS / Windows 共享文件夹</string>
+    <string name="webdav">WebDAV 网盘</string>
+    <string name="webdav_desc">连接 AList / 坚果云等网盘</string>
+
+    <string name="host">服务器地址</string>
+    <string name="host_hint_smb">例如 192.168.1.100</string>
+    <string name="host_hint_webdav">http://192.168.1.100:5244/dav</string>
+    <string name="share">共享文件夹名</string>
+    <string name="share_hint">例如 video 或 public</string>
+    <string name="username">用户名</string>
+    <string name="username_hint">可留空（匿名访问）</string>
+    <string name="password">密码</string>
+    <string name="connect">连接</string>
+    <string name="history">我的服务器（点一下直连）</string>
+    <string name="auto_connect">启动时自动连接上次的服务器</string>
+    <string name="connecting">正在连接…</string>
+    <string name="empty_hint">请填写完整信息</string>
+    <string name="browse_title">文件浏览</string>
+    <string name="loading">加载中…</string>
+    <string name="empty_dir">此目录为空</string>
+    <string name="parent_dir">返回上级目录</string>
+    <string name="back">返回</string>
+    <string name="diag">诊断日志 / 播放引擎</string>
+
+    <!-- v1.26 新增 -->
+    <string name="add_server">添加服务器</string>
+    <string name="add_server_title">添加服务器</string>
+    <string name="add_server_hint">SMB 与 WebDAV 都在这里添加</string>
+    <string name="save_and_connect">保存并连接</string>
+    <string name="cancel">取消</string>
+    <string name="refresh_usb">刷新 U 盘</string>
+    <string name="auto_connect_short">开机自动连接</string>
+    <string name="no_server">还没有服务器\n点右侧 ＋ 号添加 SMB 或 WebDAV 地址</string>
+    <string name="no_usb">未检测到 U 盘\n插入后会自动出现在这里</string>
+    <string name="card_hint">点击打开 · 长按可编辑 / 删除</string>
+    <string name="on">开</string>
+    <string name="off">关</string>
+    <string name="section_continue">继续观看</string>
+</resources>

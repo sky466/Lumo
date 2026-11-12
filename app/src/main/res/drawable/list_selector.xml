@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ListView 方向键导航时的选中高亮（半透明蓝色覆盖层） -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#1E88E5" />
+        </shape>
+    </item>
+    <item android:state_focused="false" android:state_selected="false" android:state_activated="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#661565C0" />
+        </shape>
+    </item>
+</selector>

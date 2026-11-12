@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  浅色（白天）主题：默认资源。深色值在 values-night/colors.xml 里，
+  两边必须保持同名同套，App 里切换主题靠 uiMode 切换（见 Theme.java）。
+-->
+<resources>
+    <!-- 背景与层次 -->
+    <color name="bg">#F5F7FB</color>
+    <color name="bg_deep">#FFFFFF</color>
+    <color name="bg_a">#EEF2F9</color>
+    <color name="bg_b">#FFFFFF</color>
+    <color name="card">#FFFFFF</color>
+    <color name="card_press">#EFF4FC</color>
+    <color name="card_focus">#E7EFFE</color>
+    <color name="stroke">#DCE4EF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_stroke">#E3EAF3</color>
+    <color name="list_stroke">#E6ECF5</color>
+    <color name="divider">#E6ECF5</color>
+
+    <!-- 品牌色 -->
+    <color name="accent">#2563EB</color>
+    <color name="accent_light">#1D4ED8</color>
+    <color name="accent2">#16A34A</color>
+    <color name="warn">#D97706</color>
+
+    <!-- 文字 -->
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#52607A</color>
+    <color name="text_tertiary">#8C99AD</color>
+    <color name="text_body">#334155</color>
+    <color name="text_muted">#64748B</color>
+    <color name="text_danger">#DC2626</color>
+
+    <!-- 对话框 / 输入框 -->
+    <color name="dialog_fill">#FFFFFF</color>
+    <color name="dialog_stroke">#DFE6F0</color>
+    <color name="input_fill">#F2F5FA</color>
+    <color name="input_stroke">#D8E1EC</color>
+    <color name="input_focus_fill">#FFFFFF</color>
+
+    <!-- 按钮 -->
+    <color name="rail_fill">#FFFFFF</color>
+    <color name="rail_focus">#E7EFFE</color>
+    <color name="btn_ghost_fill">#F3F6FB</color>
+    <color name="btn_ghost_press">#E6ECF5</color>
+    <color name="btn_ghost_focus">#E7EFFE</color>
+    <color name="btn_primary_press">#1E40AF</color>
+    <color name="btn_primary_a">#3B82F6</color>
+    <color name="btn_primary_b">#2563EB</color>
+    <color name="icon_press_fill">#142563EB</color>
+    <color name="icon_focus_fill">#1F2563EB</color>
+    <color name="tab_off_fill">#EEF2F9</color>
+    <color name="pill_fill">#EEF2F9</color>
+
+    <!-- 文件类型徽标（浅色底 + 深字） -->
+    <color name="badge_dir">#DBEAFE</color>
+    <color name="badge_smb">#DCFCE7</color>
+    <color name="badge_webdav">#DBEAFE</color>
+    <color name="badge_usb">#FEF3C7</color>
+    <color name="badge_video">#DCFCE7</color>
+    <color name="badge_image">#FEF3C7</color>
+    <color name="badge_file">#E5E7EB</color>
+    <color name="badge_text">#0F172A</color>
+    <!-- 兼容旧命名 -->
+    <color name="smb_badge">#DCFCE7</color>
+    <color name="webdav_badge">#DBEAFE</color>
+    <color name="usb_badge">#FEF3C7</color>
+
+    <!-- ===== 播放器界面（盖在视频上的那一层，v1.40 起跟着主题走） ===== -->
+    <!-- 浅色主题：磨砂白玻璃 + 深字，画面再亮也看得清 -->
+    <color name="player_panel">#F2FFFFFF</color>
+    <color name="player_panel_stroke">#260B0F17</color>
+    <color name="player_btn_fill">#120B0F17</color>
+    <color name="player_btn_stroke">#1F0B0F17</color>
+    <color name="player_btn_press">#D9E6FA</color>
+    <color name="player_btn_focus">#E7EFFE</color>
+    <color name="player_btn_focus_stroke">#2563EB</color>
+    <color name="player_hud_fill">#F2FFFFFF</color>
+    <color name="player_track">#2E0B0F17</color>
+    <color name="player_thumb">#2563EB</color>
+    <color name="player_top_from">#E6FFFFFF</color>
+    <color name="player_top_to">#00FFFFFF</color>
+</resources>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  深色（影院）主题：系统进入 night 模式时使用。
+  与 values/colors.xml 同名同套，只换值。
+-->
+<resources>
+    <!-- 背景与层次 -->
+    <color name="bg">#0B0E13</color>
+    <color name="bg_deep">#070910</color>
+    <color name="bg_a">#070910</color>
+    <color name="bg_b">#111827</color>
+    <color name="card">#161B24</color>
+    <color name="card_press">#20293A</color>
+    <color name="card_focus">#1E2838</color>
+    <color name="stroke">#232C3A</color>
+    <color name="surface">#0E131B</color>
+    <color name="surface_stroke">#19212D</color>
+    <color name="list_stroke">#1D2531</color>
+    <color name="divider">#1F2734</color>
+
+    <!-- 品牌色 -->
+    <color name="accent">#3B82F6</color>
+    <color name="accent_light">#7FB2FF</color>
+    <color name="accent2">#4CAF50</color>
+    <color name="warn">#F59E0B</color>
+
+    <!-- 文字 -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#9AA6B8</color>
+    <color name="text_tertiary">#5D6779</color>
+    <color name="text_body">#C7D0DE</color>
+    <color name="text_muted">#8A94A6</color>
+    <color name="text_danger">#FF8A80</color>
+
+    <!-- 对话框 / 输入框 -->
+    <color name="dialog_fill">#12161F</color>
+    <color name="dialog_stroke">#2A3547</color>
+    <color name="input_fill">#0F141C</color>
+    <color name="input_stroke">#242E3C</color>
+    <color name="input_focus_fill">#182131</color>
+
+    <!-- 按钮 -->
+    <color name="rail_fill">#131922</color>
+    <color name="rail_focus">#22304A</color>
+    <color name="btn_ghost_fill">#171D27</color>
+    <color name="btn_ghost_press">#2A3446</color>
+    <color name="btn_ghost_focus">#1E2838</color>
+    <color name="btn_primary_press">#1D4ED8</color>
+    <color name="btn_primary_a">#4F95FF</color>
+    <color name="btn_primary_b">#2563EB</color>
+    <color name="icon_press_fill">#33204A7A</color>
+    <color name="icon_focus_fill">#262A5DA8</color>
+    <color name="tab_off_fill">#1A2130</color>
+    <color name="pill_fill">#161C26</color>
+
+    <!-- 文件类型徽标（深色底 + 白字） -->
+    <color name="badge_dir">#1F3A5F</color>
+    <color name="badge_smb">#1B5E20</color>
+    <color name="badge_webdav">#0D47A1</color>
+    <color name="badge_usb">#7A4A05</color>
+    <color name="badge_video">#1B5E20</color>
+    <color name="badge_image">#7A4A05</color>
+    <color name="badge_file">#2A3040</color>
+    <color name="badge_text">#FFFFFF</color>
+    <!-- 兼容旧命名 -->
+    <color name="smb_badge">#1B5E20</color>
+    <color name="webdav_badge">#0D47A1</color>
+    <color name="usb_badge">#7A4A05</color>
+
+    <!-- ===== 播放器界面（盖在视频上的那一层） ===== -->
+    <!-- 深色主题：深色玻璃 + 白字 -->
+    <color name="player_panel">#F20B0F17</color>
+    <color name="player_panel_stroke">#22FFFFFF</color>
+    <color name="player_btn_fill">#2EFFFFFF</color>
+    <color name="player_btn_stroke">#1AFFFFFF</color>
+    <color name="player_btn_press">#E61E88E5</color>
+    <color name="player_btn_focus">#F02A5DA8</color>
+    <color name="player_btn_focus_stroke">#FFFFFF</color>
+    <color name="player_hud_fill">#E60B0F17</color>
+    <color name="player_track">#33FFFFFF</color>
+    <color name="player_thumb">#7FB2FF</color>
+    <color name="player_top_from">#CC000000</color>
+    <color name="player_top_to">#00000000</color>
+</resources>

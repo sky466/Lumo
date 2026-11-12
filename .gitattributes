@@ -1,0 +1,11 @@
+# 二进制文件不做换行符转换，C/Java 统一 LF
+*.so binary
+*.jar binary
+*.apk binary
+*.png binary
+*.keystore binary
+*.java text eol=lf
+*.c text eol=lf
+*.gradle text eol=lf
+*.md text eol=lf
+gradlew text eol=lf

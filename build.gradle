@@ -1,0 +1,28 @@
+// 乐视 X50 Air 播放器（Lumo）——原生 Android 工程
+// SMB2/SMB3 + SMB1 + WebDAV 文件浏览，ijkplayer / 系统解码多引擎播放
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        // 国内网络访问 google()/mavenCentral() 慢时的镜像，按顺序回退
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

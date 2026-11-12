@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  播放界面（v1.27）：
+   · 触摸屏：点画面 = 呼出/隐藏控制条，双击 = 播放/暂停，左右滑动 = 快进/快退
+   · 遥控器：MENU / 上下键呼出控制条，确定键播放暂停，左右键快退快进（原逻辑不变）
+   · 控制条重排成「时间轴 + 主控 + 次要功能横滑」三段，手机横屏也不会挤爆
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/player_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <SurfaceView
+        android:id="@+id/surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+
+    <TextureView
+        android:id="@+id/texture_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <VideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- 触摸热区：铺满整屏但透明，专门接收手势（不挡控制条按钮） -->
+    <View
+        android:id="@+id/touch_layer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/player_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:textSize="15sp"
+        android:textColor="@color/text_primary"
+        android:background="@drawable/top_scrim"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="16dp"
+        android:gravity="center" />
+
+    <!-- 轻量 HUD：调音量/亮度/拖进度时在顶部显示，1 秒后自动消失（不再是弹窗提示） -->
+    <TextView
+        android:id="@+id/hud_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/hud_bg"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:maxWidth="620dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        android:textColor="@color/text_primary"
+        android:visibility="gone" />
+
+    <!--
+      信息面板（v1.45）：按「信息」按钮 / 遥控器 INFO 键弹出，
+      显示 分辨率 / 编码 / 码率 / 引擎 / 渲染层 / 实测流畅度 / 缓冲。
+      卡的时候一眼能看出是解码不够还是渲染太贵。
+    -->
+    <LinearLayout
+        android:id="@+id/info_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/hud_bg"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="播放信息"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/accent_light" />
+
+        <TextView
+            android:id="@+id/info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:lineSpacingExtra="6dp"
+            android:fontFamily="monospace"
+            android:textColor="@color/text_primary" />
+    </LinearLayout>
+
+    <!--
+      快进/快退时间胶囊（v1.40）：
+      电视上用方向键或遥控器快进快退时，画面底部实时显示「当前时间 / 总时长」和累计跳了多少，
+      松手后停 1.4 秒自动消失。控制条没呼出时也能看到，不用靠猜。
+    -->
+    <LinearLayout
+        android:id="@+id/seek_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="120dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/hud_bg"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/seek_hint_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00 / 00:00"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:singleLine="true"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/seek_hint_delta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="快进 5 秒"
+            android:textSize="13sp"
+            android:singleLine="true"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/log_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="52dp"
+        android:textSize="11sp"
+        android:textColor="#FFB74D"
+        android:background="#CC000000"
+        android:padding="8dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/subtitle_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="96dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:textColor="#FFFFFF"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:visibility="gone" />
+
+    <!-- ============ 控制条（触摸点击画面 / 遥控器 MENU 呼出） ============ -->
+    <LinearLayout
+        android:id="@+id/controller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@drawable/bottom_scrim"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="14dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tips_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+        <!-- 时间轴 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="6dp">
+
+            <TextView
+                android:id="@+id/cur_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:textColor="@color/text_primary"
+                android:text="00:00" />
+
+            <com.letvcast.player.SeekBarLumo
+                android:id="@+id/seek_bar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="34dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:max="1000"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/total_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:textColor="@color/text_primary"
+                android:text="00:00" />
+        </LinearLayout>
+
+        <!-- 主控：上一集 / 后退 / 播放暂停 / 前进 / 下一集（等宽，触摸友好） -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="10dp">
+
+            <Button
+                android:id="@+id/btn_prev"
+                style="@style/PlayerBtn"
+                android:layout_weight="1"
+                android:text="上一集" />
+
+            <Button
+                android:id="@+id/btn_rew"
+                style="@style/PlayerBtn"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:text="−5s" />
+
+            <Button
+                android:id="@+id/btn_play"
+                style="@style/PlayerBtn"
+                android:layout_weight="1.4"
+                android:layout_marginLeft="8dp"
+                android:text="暂停"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_fwd"
+                style="@style/PlayerBtn"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:text="+5s" />
+
+            <Button
+                android:id="@+id/btn_next"
+                style="@style/PlayerBtn"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:text="下一集" />
+        </LinearLayout>
+
+        <!-- 次要功能：一行放不下就左右滑（手机上也能点到） -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:scrollbars="none"
+            android:focusable="false">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btn_speed"
+                    style="@style/PlayerBtnSmall"
+                    android:text="速度 1.0x" />
+
+                <Button
+                    android:id="@+id/btn_engine"
+                    style="@style/PlayerBtnSmall"
+                    android:text="引擎" />
+
+                <Button
+                    android:id="@+id/btn_aspect"
+                    style="@style/PlayerBtnSmall"
+                    android:text="比例 适应" />
+
+                <Button
+                    android:id="@+id/btn_rotate"
+                    style="@style/PlayerBtnSmall"
+                    android:text="旋转 0°" />
+
+                <Button
+                    android:id="@+id/btn_zoom_in"
+                    style="@style/PlayerBtnSmall"
+                    android:text="放大" />
+
+                <Button
+                    android:id="@+id/btn_zoom_out"
+                    style="@style/PlayerBtnSmall"
+                    android:text="缩小" />
+
+                <Button
+                    android:id="@+id/btn_av"
+                    style="@style/PlayerBtnSmall"
+                    android:text="字幕·音轨" />
+
+                <Button
+                    android:id="@+id/btn_loop"
+                    style="@style/PlayerBtnSmall"
+                    android:text="连播 开" />
+
+                <Button
+                    android:id="@+id/btn_trim"
+                    style="@style/PlayerBtnSmall"
+                    android:text="片头片尾" />
+
+                <Button
+                    android:id="@+id/btn_info"
+                    style="@style/PlayerBtnSmall"
+                    android:text="信息" />
+
+                <Button
+                    android:id="@+id/btn_log"
+                    style="@style/PlayerBtnSmall"
+                    android:text="日志" />
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+</FrameLayout>

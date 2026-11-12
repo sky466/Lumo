@@ -85,7 +85,7 @@ SMB 共享，插 U 盘直接放，五种播放引擎按机器能力自动挑选�
 | 分辨率 | 1280×720 起，TV 布局在 `w720dp` 生效 |
 | 实测 | 乐视 X50 Air（Android 4.3）、Android 5.0 / 7 / 9 手机模拟器 |
 
-> 打包只带 `armeabi-v7a`，APK 19MB。想在 arm64 设备上调试，把 `app/build.gradle`
+> 打包只带 `armeabi-v7a`，APK 2MB。想在 arm64 设备上调试，把 `app/build.gradle`
 > 里的 `abiFilters` 改成 `arm64-v8a`（此时 ijkplayer 不可用，其它引擎正常）。
 
 ---

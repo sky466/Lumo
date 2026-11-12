@@ -19,8 +19,17 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # 不用 android-actions/setup-android：它内部执行 `sdkmanager tools`，
+      # 新版 cmdline-tools 里已经没有 "tools" 这个包，会直接 Failed to find package 'tools' 退出。
+      # runner 镜像本来就带 Android SDK，这里只补齐缺少的 platform / build-tools。
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        run: |
+          SDK="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          echo "ANDROID_SDK_ROOT=$SDK" >> "$GITHUB_ENV"
+          echo "ANDROID_HOME=$SDK" >> "$GITHUB_ENV"
+          SDKMANAGER="$(command -v sdkmanager || echo "$SDK/cmdline-tools/latest/bin/sdkmanager")"
+          yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
+          "$SDKMANAGER" --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Cache Gradle
         uses: actions/cache@v4
